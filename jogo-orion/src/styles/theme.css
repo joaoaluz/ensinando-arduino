@@ -1,0 +1,64 @@
+/* =========================================================
+   TOKENS — mude aqui para reestilizar o jogo inteiro.
+   ========================================================= */
+:root {
+  /* Fundo */
+  --bg-deep: #04070f;
+  --bg: #070c18;
+  --bg-raised: #0c1424;
+  --panel: rgba(14, 24, 42, 0.82);
+  --panel-solid: #0e182a;
+
+  /* Linhas e bordas */
+  --line: rgba(88, 166, 255, 0.18);
+  --line-strong: rgba(88, 166, 255, 0.42);
+
+  /* Acentos */
+  --cyan: #3ee0ff;
+  --cyan-deep: #1897b8;
+  --amber: #ffb545;
+  --green: #34e39b;
+  --red: #ff6b7a;
+  --violet: #a98bff;
+
+  /* Texto */
+  --text: #e9f2ff;
+  --text-dim: #a9bcd8;
+  --text-faint: #6f83a3;
+
+  /* Tipografia */
+  --font-display: 'Chakra Petch', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Fira Code', 'Consolas', monospace;
+
+  /* Escala — generosa de propósito: o jogo é visto por projetor. */
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.625rem;
+  --fs-2xl: 2.25rem;
+  --fs-hero: clamp(2.5rem, 7vw, 4.75rem);
+
+  /* Espaçamento */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --glow-cyan: 0 0 24px rgba(62, 224, 255, 0.28);
+  --glow-green: 0 0 24px rgba(52, 227, 155, 0.3);
+  --glow-amber: 0 0 32px rgba(255, 181, 69, 0.35);
+  --shadow-panel: 0 18px 48px rgba(0, 0, 0, 0.55);
+
+  --header-h: 76px;
+  --content-max: 1120px;
+}

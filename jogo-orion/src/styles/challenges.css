@@ -1,0 +1,954 @@
+/* =========================================================
+   COMPONENTES DE DESAFIO
+   ========================================================= */
+
+/* ---------- Cabeçalho da missão ---------- */
+.mission__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-5);
+}
+
+.mission__ident {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.mission__icon {
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.mission__code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  color: var(--cyan);
+}
+
+.mission__name {
+  font-size: var(--fs-xl);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.mission__body {
+  animation: step-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- DIÁLOGO (§35) ---------- */
+.dialogue {
+  border-left: 3px solid var(--cyan);
+}
+
+.dialogue__who {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: var(--sp-4);
+}
+
+.dialogue__lines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  font-size: var(--fs-lg);
+  color: var(--text);
+  margin-bottom: var(--sp-5);
+}
+
+.dialogue__lines p:last-child {
+  color: var(--text-dim);
+}
+
+/* ---------- PERGUNTA ---------- */
+.question {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  line-height: 1.3;
+  margin-bottom: var(--sp-2);
+}
+
+.question__hint {
+  color: var(--text-dim);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--sp-5);
+}
+
+/* ---------- OPÇÕES (múltipla escolha) ---------- */
+.options {
+  display: grid;
+  gap: var(--sp-3);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.options--stacked {
+  grid-template-columns: 1fr;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  text-align: left;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  transition:
+    transform 0.14s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.option:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--cyan);
+  background: rgba(62, 224, 255, 0.08);
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.option__icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.option__label {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  flex: 1;
+}
+
+.option__label--mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: #9fe6ff;
+  letter-spacing: 0;
+}
+
+.option__note {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  font-weight: 400;
+}
+
+.option__mark {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* Estados nunca dependem só de cor: há sempre ✓ / ✕ e texto (§37). */
+.option--correct {
+  border-color: var(--green);
+  background: rgba(52, 227, 155, 0.14);
+  box-shadow: var(--glow-green);
+}
+
+.option--wrong {
+  border-color: var(--red);
+  background: rgba(255, 107, 122, 0.12);
+  animation: shake 0.36s ease;
+}
+
+.option--dim {
+  opacity: 0.4;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-7px);
+  }
+  75% {
+    transform: translateX(7px);
+  }
+}
+
+/* ---------- FEEDBACK ---------- */
+.feedback {
+  display: flex;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  margin-top: var(--sp-5);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  animation: step-in 0.3s ease;
+}
+
+.feedback__icon {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.feedback__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.feedback__text {
+  color: var(--text-dim);
+  font-size: var(--fs-sm);
+  margin-top: 2px;
+}
+
+.feedback__xp {
+  display: inline-block;
+  margin-top: var(--sp-2);
+  padding: 2px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(62, 224, 255, 0.14);
+  border: 1px solid rgba(62, 224, 255, 0.4);
+  color: var(--cyan);
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.08em;
+}
+
+.feedback--correct {
+  border-color: rgba(52, 227, 155, 0.5);
+  background: rgba(52, 227, 155, 0.09);
+}
+.feedback--correct .feedback__title {
+  color: var(--green);
+}
+
+.feedback--wrong {
+  border-color: rgba(255, 107, 122, 0.45);
+  background: rgba(255, 107, 122, 0.08);
+}
+.feedback--wrong .feedback__title {
+  color: var(--red);
+}
+
+.feedback--info {
+  border-color: rgba(62, 224, 255, 0.4);
+  background: rgba(62, 224, 255, 0.07);
+}
+.feedback--info .feedback__title {
+  color: var(--cyan);
+}
+
+/* Explicação do conceito, mostrada DEPOIS da tentativa (§3) */
+.concept {
+  margin-top: var(--sp-4);
+  padding: var(--sp-4);
+  border-radius: var(--radius);
+  border: 1px dashed var(--line-strong);
+  background: rgba(62, 224, 255, 0.05);
+}
+
+.concept__tag {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 6px;
+}
+
+.concept p + p {
+  margin-top: var(--sp-2);
+}
+
+/* ---------- DICAS (§28) ---------- */
+.hints {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+}
+
+.hint {
+  display: flex;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  margin-top: var(--sp-3);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 181, 69, 0.4);
+  background: rgba(255, 181, 69, 0.08);
+  animation: step-in 0.3s ease;
+}
+
+.hint__label {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.hint__text {
+  font-size: var(--fs-sm);
+  color: var(--text-dim);
+}
+
+/* ---------- CARDS DE COMPONENTE ---------- */
+.comp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--sp-3);
+}
+
+.comp {
+  padding: var(--sp-4);
+  text-align: center;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  transition:
+    transform 0.16s ease,
+    border-color 0.2s ease;
+}
+
+.comp:hover {
+  transform: translateY(-3px);
+  border-color: var(--line-strong);
+}
+
+.comp__icon {
+  font-size: 2rem;
+  line-height: 1;
+  display: block;
+  margin-bottom: var(--sp-2);
+}
+
+.comp__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+}
+
+.comp__role {
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+.comp--found {
+  border-color: var(--green);
+  background: rgba(52, 227, 155, 0.1);
+}
+
+/* ---------- CIRCUITO (SVG) ---------- */
+.circuit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.circuit__svg {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+}
+
+.circuit__status {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-family: var(--font-display);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.wire {
+  stroke: #46608c;
+  stroke-width: 5;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.wire--live {
+  stroke: var(--cyan);
+  filter: drop-shadow(0 0 6px rgba(62, 224, 255, 0.8));
+}
+
+/* Elétrons correndo pelo fio quando o circuito está fechado. */
+.wire--flow {
+  stroke: var(--amber);
+  stroke-width: 5;
+  stroke-linecap: round;
+  fill: none;
+  stroke-dasharray: 10 22;
+  animation: flow 0.9s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(255, 181, 69, 0.9));
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+.led-glow {
+  transition:
+    fill 0.25s ease,
+    filter 0.25s ease;
+}
+
+.svg-label {
+  font-family: var(--font-display);
+  font-size: 15px;
+  fill: var(--text-dim);
+  letter-spacing: 0.08em;
+}
+
+.svg-label--bright {
+  fill: var(--text);
+}
+
+.svg-pin {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: #cfe2ff;
+}
+
+.switch-hit {
+  cursor: pointer;
+}
+
+.switch-hit:hover .switch-knob {
+  stroke: var(--cyan);
+}
+
+.switch-hit:hover .switch-frame {
+  stroke: var(--line-strong);
+  stroke-width: 2;
+}
+
+/* O anel de foco padrão do navegador desenharia um retângulo branco enorme
+   sobre o circuito. Trocamos por um contorno próprio, no mesmo lugar. */
+.switch-hit:focus {
+  outline: none;
+}
+
+.switch-hit:focus-visible .switch-frame {
+  stroke: var(--cyan);
+  stroke-width: 3;
+}
+
+/* ---------- ASSOCIAÇÃO (§21) ---------- */
+.match {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-5);
+}
+
+.match__col-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: var(--sp-3);
+}
+
+.match__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.match__item {
+  padding: var(--sp-4);
+  text-align: left;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  transition: all 0.16s ease;
+}
+
+.match__item:hover:not(:disabled) {
+  border-color: var(--cyan);
+  transform: translateX(3px);
+}
+
+.match__item--code {
+  font-family: var(--font-mono);
+  color: var(--cyan);
+}
+
+.match__item--selected {
+  border-color: var(--cyan);
+  background: rgba(62, 224, 255, 0.16);
+  box-shadow: var(--glow-cyan);
+}
+
+.match__item--paired {
+  border-color: var(--green);
+  background: rgba(52, 227, 155, 0.1);
+  cursor: default;
+}
+
+.match__item--shake {
+  animation: shake 0.36s ease;
+  border-color: var(--red);
+}
+
+.match__pairmark {
+  float: right;
+  color: var(--green);
+}
+
+@media (max-width: 720px) {
+  .match {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
+}
+
+/* ---------- ORDENAÇÃO (§22) ---------- */
+.order {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  max-width: 520px;
+}
+
+.order__row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.order__num {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(62, 224, 255, 0.14);
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+}
+
+.order__text {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+}
+
+.order__moves {
+  display: flex;
+  gap: 6px;
+}
+
+.order__btn {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  color: var(--text-dim);
+  transition: all 0.15s ease;
+}
+
+.order__btn:hover:not(:disabled) {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.order__btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.order__row--ok {
+  border-color: var(--green);
+  background: rgba(52, 227, 155, 0.1);
+}
+
+.order__row--bad {
+  border-color: var(--red);
+  background: rgba(255, 107, 122, 0.08);
+}
+
+/* ---------- MONTAGEM POR SLOTS (§24) ---------- */
+.build {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: var(--sp-5);
+  align-items: start;
+}
+
+.build__chain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.build__fixed,
+.build__slot {
+  width: 100%;
+  max-width: 340px;
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  text-align: center;
+}
+
+.build__fixed {
+  border: 1px solid var(--line-strong);
+  background: rgba(62, 224, 255, 0.1);
+  color: var(--cyan);
+}
+
+.build__slot {
+  border: 2px dashed var(--line-strong);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-faint);
+  transition: all 0.18s ease;
+}
+
+.build__slot:hover:not(:disabled) {
+  border-color: var(--cyan);
+  color: var(--text);
+  background: rgba(62, 224, 255, 0.07);
+}
+
+.build__slot--active {
+  border-color: var(--cyan);
+  border-style: solid;
+  box-shadow: var(--glow-cyan);
+  color: var(--text);
+}
+
+.build__slot--filled {
+  border-style: solid;
+  border-color: var(--line-strong);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.build__slot--ok {
+  border-color: var(--green);
+  background: rgba(52, 227, 155, 0.12);
+  color: var(--text);
+}
+
+.build__slot--bad {
+  border-color: var(--red);
+  background: rgba(255, 107, 122, 0.1);
+  animation: shake 0.36s ease;
+}
+
+.build__arrow {
+  color: var(--line-strong);
+  font-size: 1.1rem;
+  padding: 6px 0;
+}
+
+.build__tray {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.tray-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3);
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.tray-item:hover:not(:disabled) {
+  border-color: var(--cyan);
+  transform: translateX(3px);
+}
+
+.tray-item:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.tray-item__icon {
+  font-size: 1.3rem;
+}
+
+@media (max-width: 860px) {
+  .build {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- CÓDIGO ---------- */
+.code {
+  display: block;
+  padding: var(--sp-4);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #060c17;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+  color: #d8e6ff;
+  overflow-x: auto;
+  white-space: pre;
+  tab-size: 4;
+}
+
+.code__line {
+  display: block;
+  padding: 0 var(--sp-2);
+  border-radius: 4px;
+}
+
+.code__line--bug {
+  background: rgba(255, 107, 122, 0.16);
+  box-shadow: inset 3px 0 0 var(--red);
+}
+
+.code__line--btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  padding: 0 var(--sp-2);
+  border-radius: 4px;
+  transition: background 0.15s ease;
+  white-space: pre;
+}
+
+.code__line--btn:hover:not(:disabled) {
+  background: rgba(62, 224, 255, 0.14);
+  box-shadow: inset 3px 0 0 var(--cyan);
+}
+
+.code__line--picked {
+  background: rgba(62, 224, 255, 0.18);
+  box-shadow: inset 3px 0 0 var(--cyan);
+}
+
+.tok-key {
+  color: #7ee3ff;
+}
+.tok-fn {
+  color: #ffd28a;
+}
+.tok-num {
+  color: #b8f7c8;
+}
+.tok-const {
+  color: #ff9ec4;
+}
+.tok-cmt {
+  color: #56698c;
+  font-style: italic;
+}
+
+.editor {
+  width: 100%;
+  min-height: 300px;
+  padding: var(--sp-4);
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: #060c17;
+  color: #d8e6ff;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+  resize: vertical;
+  tab-size: 4;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: auto;
+}
+
+.editor:focus {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.editor__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+}
+
+.checklist {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+}
+
+.check--ok {
+  border-color: rgba(52, 227, 155, 0.45);
+  background: rgba(52, 227, 155, 0.08);
+  color: var(--green);
+}
+
+/* ---------- PLACA ARDUINO (SVG) ---------- */
+.board {
+  width: 100%;
+  max-width: 620px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.board__hotspots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--sp-3);
+  margin-top: var(--sp-4);
+}
+
+.hotspot {
+  padding: var(--sp-3);
+  text-align: left;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.16s ease;
+}
+
+.hotspot:hover,
+.hotspot--active {
+  border-color: var(--cyan);
+  background: rgba(62, 224, 255, 0.1);
+}
+
+.hotspot__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  color: var(--cyan);
+}
+
+.hotspot__desc {
+  font-size: var(--fs-xs);
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+/* ---------- Conclusão da missão ---------- */
+.complete {
+  text-align: center;
+  border-color: rgba(52, 227, 155, 0.4);
+  background: linear-gradient(180deg, rgba(52, 227, 155, 0.08), rgba(14, 24, 42, 0.85));
+}
+
+.complete__icon {
+  font-size: 3rem;
+  line-height: 1;
+  display: block;
+  margin-bottom: var(--sp-3);
+  animation: pop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.complete__title {
+  font-size: var(--fs-xl);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--green);
+}
+
+.complete__text {
+  color: var(--text-dim);
+  margin: var(--sp-2) auto var(--sp-5);
+  max-width: 540px;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ---------- Nota do professor ---------- */
+.teacher-note {
+  margin-top: var(--sp-5);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius);
+  border: 1px dashed rgba(169, 139, 255, 0.35);
+  background: rgba(169, 139, 255, 0.06);
+  font-size: var(--fs-sm);
+  color: var(--text-dim);
+}
+
+.teacher-note strong {
+  color: var(--violet);
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+}

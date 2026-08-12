@@ -1,0 +1,516 @@
+/* =========================================================
+   PRIMITIVAS: painel, botão, badge, layout, header, XP
+   ========================================================= */
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--sp-6) var(--sp-5) var(--sp-8);
+  flex: 1;
+}
+
+.page--wide {
+  max-width: 1280px;
+}
+
+/* ---------- Painel ---------- */
+.panel {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-panel);
+  backdrop-filter: blur(10px);
+  padding: var(--sp-5);
+}
+
+.panel--flush {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Cantos de "HUD" — dá cara de painel de nave sem custo de imagem. */
+.panel--hud::before,
+.panel--hud::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--line-strong);
+  pointer-events: none;
+}
+.panel--hud::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+  border-radius: var(--radius-lg) 0 0 0;
+}
+.panel--hud::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+  border-radius: 0 0 var(--radius-lg) 0;
+}
+
+.panel__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: var(--sp-4);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+/* ---------- Botões ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-height: 52px;
+  padding: var(--sp-3) var(--sp-6);
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(180deg, rgba(62, 224, 255, 0.14), rgba(62, 224, 255, 0.04));
+  color: var(--text);
+  transition:
+    transform 0.14s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: linear-gradient(180deg, var(--cyan), var(--cyan-deep));
+  border-color: transparent;
+  color: #04121a;
+  font-weight: 700;
+}
+.btn--primary:hover:not(:disabled) {
+  box-shadow: 0 0 32px rgba(62, 224, 255, 0.5);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--text-dim);
+}
+.btn--ghost:hover:not(:disabled) {
+  color: var(--text);
+}
+
+.btn--success {
+  background: linear-gradient(180deg, var(--green), #17a06b);
+  border-color: transparent;
+  color: #03170f;
+  font-weight: 700;
+}
+.btn--success:hover:not(:disabled) {
+  box-shadow: var(--glow-green);
+}
+
+.btn--sm {
+  min-height: 40px;
+  padding: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-sm);
+}
+
+.btn--lg {
+  min-height: 64px;
+  padding: var(--sp-4) var(--sp-8);
+  font-size: var(--fs-lg);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  align-items: center;
+}
+
+/* ---------- Badge / chip ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: rgba(62, 224, 255, 0.08);
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  white-space: nowrap;
+}
+
+.badge--green {
+  color: var(--green);
+  border-color: rgba(52, 227, 155, 0.4);
+  background: rgba(52, 227, 155, 0.1);
+}
+.badge--amber {
+  color: var(--amber);
+  border-color: rgba(255, 181, 69, 0.4);
+  background: rgba(255, 181, 69, 0.1);
+}
+.badge--muted {
+  color: var(--text-faint);
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ---------- Texto utilitário ---------- */
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.muted {
+  color: var(--text-dim);
+}
+
+.tiny {
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.stack--tight {
+  gap: var(--sp-3);
+}
+
+/* ---------- HEADER ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  padding: var(--sp-3) var(--sp-5);
+  background: rgba(6, 11, 22, 0.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  text-decoration: none;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.header__logo {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.header__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+.header__subtitle {
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  letter-spacing: 0.08em;
+}
+
+.header__spacer {
+  flex: 1;
+}
+
+.header__xp {
+  flex: 1;
+  max-width: 420px;
+  min-width: 180px;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-shrink: 0;
+}
+
+/* ---------- XP BAR ---------- */
+.xpbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.xpbar__avatar {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: radial-gradient(circle at 30% 25%, rgba(62, 224, 255, 0.24), rgba(10, 20, 36, 0.9));
+  flex-shrink: 0;
+}
+
+.xpbar__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.xpbar__labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--sp-3);
+  margin-bottom: 5px;
+}
+
+.xpbar__level {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.xpbar__numbers {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.xpbar__track {
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.xpbar__fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--cyan-deep), var(--cyan));
+  box-shadow: 0 0 14px rgba(62, 224, 255, 0.6);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.xpbar--full .xpbar__fill {
+  background: linear-gradient(90deg, var(--amber), #ffd98a);
+  box-shadow: 0 0 16px rgba(255, 181, 69, 0.6);
+}
+
+/* ---------- Indicador de passos ---------- */
+.steps {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.steps__dot {
+  width: 30px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.12);
+  transition: all 0.3s ease;
+}
+
+.steps__dot--done {
+  background: var(--green);
+  box-shadow: 0 0 10px rgba(52, 227, 155, 0.5);
+}
+
+.steps__dot--current {
+  background: var(--cyan);
+  width: 46px;
+  box-shadow: var(--glow-cyan);
+}
+
+.steps__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  margin-left: var(--sp-2);
+}
+
+/* ---------- Avisos (XP / nível / conquista) ---------- */
+.notices {
+  position: fixed;
+  top: calc(var(--header-h) + 12px);
+  right: 16px;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  pointer-events: none;
+  max-width: min(360px, calc(100vw - 32px));
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: rgba(12, 22, 40, 0.96);
+  box-shadow: var(--shadow-panel);
+  animation: notice-in 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.notice__icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.notice__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  letter-spacing: 0.04em;
+}
+
+.notice__detail {
+  font-size: var(--fs-xs);
+  color: var(--text-dim);
+}
+
+.notice--xp {
+  border-color: rgba(62, 224, 255, 0.5);
+}
+.notice--xp .notice__title {
+  color: var(--cyan);
+}
+
+.notice--level {
+  border-color: rgba(255, 181, 69, 0.55);
+  box-shadow: var(--glow-amber);
+}
+.notice--level .notice__title {
+  color: var(--amber);
+}
+
+/* Conquista tem peso maior: entra maior e com brilho (§33). */
+.notice--achievement {
+  border-color: rgba(169, 139, 255, 0.6);
+  background: linear-gradient(135deg, rgba(45, 30, 80, 0.97), rgba(12, 22, 40, 0.97));
+  box-shadow: 0 0 34px rgba(169, 139, 255, 0.35);
+  padding: var(--sp-4) var(--sp-5);
+  animation: achievement-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.notice--achievement .notice__icon {
+  font-size: 2.1rem;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.notice--achievement .notice__title {
+  color: var(--violet);
+  font-size: var(--fs-lg);
+}
+
+@keyframes notice-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes achievement-in {
+  0% {
+    opacity: 0;
+    transform: translateX(40px) scale(0.85);
+  }
+  60% {
+    transform: translateX(-6px) scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.16);
+  }
+}
+
+/* ---------- Rodapé ---------- */
+.footer {
+  padding: var(--sp-5);
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 860px) {
+  .header {
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+  }
+  .header__xp {
+    order: 3;
+    max-width: none;
+    width: 100%;
+  }
+}
